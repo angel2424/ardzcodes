@@ -1,0 +1,70 @@
+---
+
+---
+
+<header class="border border-gray-300 rounded-full fixed gap-2 lg:gap-8 mt-5 -translate-x-1/2 left-1/2 p-2 flex items-center justify-between animation-ease">
+    <div class="w-10 h-10">
+        <img src="/pfp.png" alt="ardzcodes logo | Front-end Developer" class="rounded-full">
+    </div>
+    <div class="flex items-center gap-8 clip transition-[clip-path, width] ease duration-300 overflow-hidden">
+        <nav class="flex gap-5">
+            <a href="/" class="hover:text-primary hover:scale-105 animation-ease">Home</a>
+            <a href="/about" class="hover:text-primary hover:scale-105 animation-ease">About</a>
+            <a href="/projects" class="hover:text-primary hover:scale-105 animation-ease">My Work</a>
+        </nav>
+        <div class="flex gap-2">
+            <a class="bg-primary px-5 rounded-full text-white flex items-center cursor-pointer hover:px-6 hover:bg-primary/90 animation-ease font-medium text-sm">
+                Want to hire me?
+            </a>
+            <button id="lang-btn" class="bg-secondary w-10 h-10 rounded-full text-primary group cursor-pointer hover:bg-secondary/70 animation-ease">
+                <i class="fa-solid fa-earth-americas text-lg group-hover:scale-105 animation-ease"></i>
+            </button>
+        </div>
+    </div>
+    <div class="lg:hidden flex items-center gap-4 mr-2">
+        <p>Available for work</p>
+        <div class="w-1.5 h-1.5 bg-green-500 flex rounded-full animate-pulse duration-75"></div>
+    </div>
+    <button class="lg:hidden w-11 h-11 bg-primary rounded-full flex flex-col items-center justify-center gap-1 hover:bg-primary/80 group cursor-pointer animation-ease">
+        <span class="w-6 h-[3px] bg-white group-hover:scale-105"></span>
+        <span class="w-6 h-[3px] bg-white group-hover:scale-105"></span>
+    </button>
+</header>
+
+<script>
+    const langBtn = document.getElementById("lang-btn") as HTMLButtonElement;
+    langBtn.addEventListener("click", () => {
+        console.log("click")
+    });
+    const nav = document.querySelector(".clip") as HTMLDivElement;
+    const header = document.querySelector("header") as HTMLDivElement;
+
+    const collapse = () => {
+        nav.classList.add("clip-hidden", 'w-0', 'h-0')
+        nav.classList.remove('flex')
+        header.classList.remove('w-xl')
+        header.classList.add('w-fit')
+    }
+
+    const expand = () => {
+        nav.classList.remove('hidden')
+        header.classList.remove('w-fit')
+        header.classList.add('w-xl')
+        nav.classList.remove("clip-hidden", 'w-0', 'h-0')
+        nav.classList.add('flex')
+    }
+
+    if(window.innerWidth < 1024) {
+        collapse()
+    } else {
+        expand()
+    }
+
+    window?.addEventListener('resize', () => {
+        if(window.innerWidth < 1024) {
+            collapse()
+        } else {
+            expand()
+        }
+    })
+</script>
