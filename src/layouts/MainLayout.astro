@@ -2,16 +2,61 @@
 import Header from "../components/Header.astro";
 import "../styles/global.css";
 ---
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <title>ardzcodes</title>
   </head>
   <body class="w-full">
     <Header />
     <slot />
+    <div class="w-full flex justify-end lg:justify-center items-center px-5 md:px-11 xl:px-20">
+        <div class="fixed bottom-8">
+            <label class="relative inline-flex w-12 h-5">
+                <input type="checkbox" class="opacity-0 w-0 h-0 group">
+                <span class="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-primary rounded-full z-0 transition ease duration-300 before:absolute before:w-4 before:h-3 before:left-1 before:bottom-1 before:bg-white before:rounded-full group-focus:shadow group-checked:bg-primary group-checked:before:translate-x-7 before:z-40"></span>
+            </label>
+        </div>
+    </div>
+		<script>
+			import Lenis from "lenis"
+
+			type LenisInstance = InstanceType<typeof Lenis>
+
+			const lenis: LenisInstance = new Lenis({
+				duration: 1.2,
+				lerp: 0.1,
+			})
+
+			function raf(time: number): void {
+				lenis.raf(time)
+				requestAnimationFrame(raf)
+			}
+			requestAnimationFrame(raf)
+
+			// Optional: smooth anchor links
+			document
+				.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
+				.forEach((a) => {
+					a.addEventListener("click", (e) => {
+						e.preventDefault()
+						const href = a.getAttribute("href")!
+						lenis.scrollTo(href)
+					})
+				})
+
+			// (Optional) expose for debugging elsewhere
+			declare global {
+				interface Window {
+					lenis: LenisInstance
+				}
+			}
+			window.lenis = lenis
+		</script>
   </body>
 </html>

@@ -2,30 +2,30 @@
 
 ---
 
-<header class="border border-gray-300 rounded-full fixed gap-2 lg:gap-8 mt-5 -translate-x-1/2 left-1/2 p-2 flex items-center justify-between animation-ease">
+<header class="border border-gray-300 rounded-full fixed gap-2 lg:gap-8 mt-5 -translate-x-1/2 left-1/2 p-2 flex items-center justify-between animation-ease min-w-[320px] z-[999] bg-white">
     <div class="w-10 h-10">
         <img src="/pfp.png" alt="ardzcodes logo | Front-end Developer" class="rounded-full">
     </div>
     <div class="flex items-center gap-8 clip transition-[clip-path, width] ease duration-300 overflow-hidden">
-        <nav class="flex gap-5">
+        <nav class="flex gap-5 dm-sans font-medium">
             <a href="/" class="hover:text-primary hover:scale-105 animation-ease">Home</a>
             <a href="/about" class="hover:text-primary hover:scale-105 animation-ease">About</a>
             <a href="/projects" class="hover:text-primary hover:scale-105 animation-ease">My Work</a>
         </nav>
         <div class="flex gap-2">
-            <a class="bg-primary px-5 rounded-full text-white flex items-center cursor-pointer hover:px-6 hover:bg-primary/90 animation-ease font-medium text-sm">
+            <a class="bg-primary px-5 py-2 rounded-full text-white flex items-center cursor-pointer hover:px-6 hover:bg-primary/90 animation-ease font-medium text-sm">
                 Want to hire me?
             </a>
-            <button id="lang-btn" class="bg-secondary w-10 h-10 rounded-full text-primary group cursor-pointer hover:bg-secondary/70 animation-ease">
+            <!-- <button id="lang-btn" class="cal-sans bg-secondary w-10 h-10 rounded-full text-primary group cursor-pointer hover:bg-secondary/70 animation-ease">
                 <i class="fa-solid fa-earth-americas text-lg group-hover:scale-105 animation-ease"></i>
-            </button>
+            </button> -->
         </div>
     </div>
-    <div class="lg:hidden flex items-center gap-4 mr-2">
-        <p>Available for work</p>
+    <div class="available flex items-center gap-4 mr-2">
+        <p class="text-sm">Available for work</p>
         <div class="w-1.5 h-1.5 bg-green-500 flex rounded-full animate-pulse duration-75"></div>
     </div>
-    <button class="lg:hidden w-11 h-11 bg-primary rounded-full flex flex-col items-center justify-center gap-1 hover:bg-primary/80 group cursor-pointer animation-ease">
+    <button class="cta-btn w-11 h-11 bg-primary rounded-full flex flex-col items-center justify-center gap-1 hover:bg-primary/80 group cursor-pointer animation-ease">
         <span class="w-6 h-[3px] bg-white group-hover:scale-105"></span>
         <span class="w-6 h-[3px] bg-white group-hover:scale-105"></span>
     </button>
@@ -33,17 +33,23 @@
 
 <script>
     const langBtn = document.getElementById("lang-btn") as HTMLButtonElement;
-    langBtn.addEventListener("click", () => {
-        console.log("click")
-    });
+    const scrollAmount = 10
     const nav = document.querySelector(".clip") as HTMLDivElement;
     const header = document.querySelector("header") as HTMLDivElement;
+    const ctaBtn = document.querySelector(".cta-btn") as HTMLButtonElement;
+    const available = document.querySelector(".available") as HTMLDivElement;
 
     const collapse = () => {
         nav.classList.add("clip-hidden", 'w-0', 'h-0')
         nav.classList.remove('flex')
         header.classList.remove('w-xl')
         header.classList.add('w-fit')
+        if(window.innerWidth > 1024 && window.scrollY > scrollAmount) {
+            available.classList.remove('hidden')
+        } else if (window.innerWidth < 1024) {
+            ctaBtn.classList.remove('hidden')
+            available.classList.remove('hidden')
+        }
     }
 
     const expand = () => {
@@ -52,9 +58,28 @@
         header.classList.add('w-xl')
         nav.classList.remove("clip-hidden", 'w-0', 'h-0')
         nav.classList.add('flex')
+        if(window.innerWidth > 1024 && window.scrollY < scrollAmount) {
+            ctaBtn.classList.add('hidden')
+            available.classList.add('hidden')
+        } else if (window.innerWidth < 1024 && window.scrollY > scrollAmount) {
+            ctaBtn.classList.add('hidden')
+            available.classList.add('hidden')
+        }
     }
 
-    if(window.innerWidth < 1024) {
+    // langBtn.addEventListener("click", () => {
+    //     console.log("click")
+    // });
+
+    window.addEventListener("scroll", (e) => {
+        if(window.scrollY > scrollAmount && window.innerWidth > 1024) {
+            collapse()
+        } else if(window.scrollY < scrollAmount && window.innerWidth > 1024){
+            expand()
+        }
+    })
+
+    if(window.innerWidth < 1024 || window.scrollY > scrollAmount) {
         collapse()
     } else {
         expand()
