@@ -1,11 +1,116 @@
 ---
-import Hero from "../components/home/Hero.astro";
+import PortraitFlip from "../components/PortraitFlip.jsx";
 import MainLayout from "../layouts/MainLayout.astro";
+import Accordion from '../components/Accordion.astro';
 
+const faqItems = [
+  {
+    title: "What is GSAP?",
+    content: "GSAP (GreenSock Animation Platform) is a professional-grade JavaScript animation library that enables smooth, high-performance animations."
+  },
+  {
+    title: "How does this accordion work?",
+    content: "This accordion uses GSAP to animate the height of each content panel, creating smooth expand and collapse animations with customizable easing."
+  },
+  {
+    title: "Can I customize the styling?",
+    content: "Absolutely! You can modify the Tailwind classes or add your own custom styles to match your design system."
+  }
+];
 ---
 
 <MainLayout>
-    <main class="h-[300vh]">
-        <Hero />
-    </main>
+  <main>
+    <div id="flip-scroll-container" class="relative">
+    <PortraitFlip client:load />
+
+      <!-- Section 1: Hero -->
+      <section class="section-1 min-h-screen px-5 md:px-11 xl:px-20 py-32 flex flex-col items-center justify-center">
+        <div class="flex flex-col xl:flex-row items-center gap-12">
+          <!-- Left column -->
+          <div class="flex-1 column items-start">
+            <h1 class="uppercase text-2xl font-medium text-neutral">Angel Rodriguez</h1>
+            <h2 class="cal-sans text-hero text-neutral">Frontend</h2>
+          </div>
+
+          <div class="flex-1 relative flex flex-col items-center">
+            <!-- This div now just maintains spacing -->
+            <div class="w-[300px] lg:w-[380px] h-[420px] lg:h-[480px]"></div>
+          </div>
+
+          <!-- Right column -->
+          <div class="flex-1 column">
+            <div class="w-fit flex flex-col items-end lg:mt-24">
+              <h2 class="cal-sans text-hero text-neutral mb-5">Developer</h2>
+              <p class="text-lg max-w-80 text-right">
+                Mexican based developer and UI Designer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-2 min-h-screen flex items-center bg-gray-50 px-5 md:px-11 xl:px-20 py-32">
+        <div class="xl:max-w-[50vw]">
+            <h2 class="cal-sans text-5xl text-neutral">What I can do for you</h2>
+            <p class="text-xl font-light text-neutral mt-5 mb-8">As a digital designer, I am a visual storyteller, crafting experiences that connect deeply and spark creativity.</p>
+            <Accordion items={faqItems} />
+        </div>
+      </section>
+
+      <section class="section-3 min-h-screen flex items-center bg-white px-5 md:px-11 xl:px-20 py-20">
+        <div class="xl:max-w-[50vw]">
+            <h2 class="text-6xl cal-sans">About me</h2>
+            <p class="text-xl font-light text-neutral mt-5 mb-8">Hi, I'm Duncan — a digital designer and Framer developer passionate about crafting meaningful and impactful digital experiences.</p>
+            <div class="flex items-center gap-8">
+                <h3 class="text-lg font-semibold flex flex-col">
+                    <span class="text-5xl text-primary cal-sans font-normal">3</span>
+                    Years of experience
+                </h3>
+                <h3 class="text-lg font-semibold flex flex-col">
+                    <span class="text-5xl text-primary cal-sans font-normal">+15</span>
+                    Completed projects
+                </h3>
+                <h3 class="text-lg font-semibold flex flex-col">
+                    <span class="text-5xl text-primary cal-sans font-normal">10+</span>
+                    Worldwide clients
+                </h3>
+            </div>
+            <div class="flex gap-13 mt-10">
+                <div>
+                    <h5 class="font-semibold text-lg text-gray-700">Call me:</h5>
+                    <a href="phone:+528781235015" class="text-lg text-gray-600">+52(878) 123 5015</a>
+                </div>
+                <div>
+                    <h5 class="font-semibold text-lg text-gray-700">Email:</h5>
+                    <a href="mailto:info@ardzcodes.site" class="text-lg text-gray-600">info@ardzcodes.site</a>
+                </div>
+            </div>
+            <div class="mt-10 text-3xl flex gap-5 items-center">
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-primary/5 hover:border-primary/70 transition-[background-color, border-color] ease duration-200">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-primary/5 hover:border-primary/70 transition-[background-color, border-color] ease duration-200">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-primary/5 hover:border-primary/70 transition-[background-color, border-color] ease duration-200">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-primary/5 hover:border-primary/70 transition-[background-color, border-color] ease duration-200">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="#" class="border border-gray-300 rounded-full p-3 hover:bg-primary/5 hover:border-primary/70 transition-[background-color, border-color] ease duration-200">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+            </div>
+            <div class="mt-14">
+                <a href="#" class="border border-primary px-12 py-3 rounded-full">My story</a>
+            </div>
+        </div>
+      </section>
+    </div>
+    <section class="px-5 md:px-11 xl:px-20 py-20 min-h-[200vh]">
+      <h2 class="text-6xl cal-sans">Featured projects</h2>
+    </section>
+  </main>
 </MainLayout>

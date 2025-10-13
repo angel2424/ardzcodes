@@ -1,0 +1,140 @@
+---
+// Accordion.astro
+interface AccordionItem {
+  title: string;
+  content: string;
+}
+
+interface Props {
+  items: AccordionItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="accordion-container max-w-3xl mx-auto space-y-4">
+  {items.map((item, index) => (
+    <div class="accordion-item border-b border-gray-300 overflow-hidden">
+      <button
+        class="accordion-trigger w-full py-4 flex items-center justify-between hover:bg-primary/5 rounded-lg cursor-pointer transition-colors text-left"
+        data-index={index}
+      >
+        <span class="text-xl cal-sans">{item.title}</span>
+        <svg
+          class="accordion-icon w-5 h-5 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="accordion-content" data-index={index}>
+        <div class="accordion-content-inner px-3 py-4 bg-gray-50">
+          <p class="text-gray-700">{item.content}</p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .accordion-content {
+    height: 0;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+
+  function initAccordion() {
+    const triggers = document.querySelectorAll(".accordion-trigger");
+    const contents = document.querySelectorAll(".accordion-content");
+    const icons = document.querySelectorAll(".accordion-icon");
+
+    // Set initial state - all closed
+    gsap.set(contents, { height: 0 });
+
+    triggers.forEach((trigger, index) => {
+      let isOpen = false;
+
+      trigger.addEventListener("click", () => {
+        const content = contents[index];
+        const icon = icons[index];
+        const inner = content.querySelector(".accordion-content-inner");
+
+        if (!isOpen) {
+          // Open this accordion
+          const fullHeight = inner.offsetHeight;
+
+          gsap.to(content, {
+            height: fullHeight,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+
+          gsap.to(icon, {
+            rotation: 180,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          isOpen = true;
+
+          // Close other accordions (optional - remove if you want multiple open)
+          triggers.forEach((otherTrigger, otherIndex) => {
+            if (otherIndex !== index) {
+              const otherContent = contents[otherIndex];
+              const otherIcon = icons[otherIndex];
+
+              gsap.to(otherContent, {
+                height: 0,
+                duration: 0.5,
+                ease: "power2.out",
+              });
+
+              gsap.to(otherIcon, {
+                rotation: 0,
+                duration: 0.3,
+                ease: "power2.out",
+              });
+
+              // Reset the isOpen state for other items
+              if (otherTrigger !== trigger) {
+                (otherTrigger as any).isOpen = false;
+              }
+            }
+          });
+        } else {
+          // Close this accordion
+          gsap.to(content, {
+            height: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+
+          gsap.to(icon, {
+            rotation: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          isOpen = false;
+        }
+
+        // Store state on the element
+        (trigger as any).isOpen = isOpen;
+      });
+
+      // Store initial state
+      (trigger as any).isOpen = false;
+    });
+  }
+
+  // Initialize on page load
+  initAccordion();
+
+  // Reinitialize on navigation (for Astro view transitions)
+  document.addEventListener("astro:page-load", initAccordion);
+</script>

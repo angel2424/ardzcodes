@@ -3,7 +3,7 @@
 :root {
 	--cal-sans: "Cal Sans", sans-serif;
 	--dm-sans: "DM Sans", sans-serif;
-	--hero-font-size: clamp(4.8rem, 7vw, 6.8rem);
+	--hero-font-size: clamp(4.8rem, 6.4vw, 6.4rem);
 }
 
 @theme {
