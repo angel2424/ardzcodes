@@ -1,5 +1,5 @@
 ---
-import PortraitFlip from "../components/PortraitFlip.jsx";
+import PortraitFlip from "../components/PortraitFlip.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 import Accordion from '../components/Accordion.astro';
 
@@ -22,7 +22,7 @@ const faqItems = [
 <MainLayout>
   <main>
     <div id="flip-scroll-container" class="relative">
-    <PortraitFlip client:load />
+    <PortraitFlip />
 
       <!-- Section 1: Hero -->
       <section class="section-1 min-h-screen px-5 md:px-11 xl:px-20 py-32 flex flex-col items-center justify-center">
