@@ -1,0 +1,42 @@
+---
+import type { Lang } from '../../i18n/translations'
+import { useTranslations } from '../../i18n/translations'
+
+const lang = (Astro.currentLocale ?? 'en') as Lang
+const t = useTranslations(lang)
+
+const paragraphs = t.about.text.split('\n\n')
+---
+
+<section
+  id="about"
+  data-section="about"
+  class="mx-auto flex max-w-7xl flex-col items-center gap-24 px-8 py-28 lg:flex-row"
+>
+  <div class="max-w-sm">
+    <img
+      src="/portrait.jpg"
+      alt="Portrait"
+      loading="lazy"
+      class="aspect-3/4 h-auto w-full overflow-hidden rounded-2xl object-cover"
+    />
+  </div>
+
+  <div class="mt-0 flex flex-1 flex-col justify-center">
+    <h2
+      class="text-brand-900 dark:text-brand-100 font-heading relative mb-7 overflow-hidden text-4xl leading-12 font-bold"
+    >
+      {t.about.title}
+    </h2>
+
+    <div class="flex flex-col gap-5">
+      {
+        paragraphs.map((paragraph) => (
+          <p class="text-justify text-lg font-normal text-gray-600 dark:text-gray-400">
+            {paragraph}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+</section>

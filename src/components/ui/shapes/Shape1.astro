@@ -1,0 +1,33 @@
+---
+interface Props {
+  className?: string
+}
+
+const { className } = Astro.props
+---
+
+<div class={className}>
+  <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" fill="none">
+    <defs>
+      <linearGradient id="animGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#b8dee9">
+          <animate
+            attributeName="stop-color"
+            values="#b8dee9;#f0f9fb;#d9eef4;#b8dee9"
+            dur="3s"
+            repeatCount="indefinite"></animate>
+        </stop>
+        <stop offset="100%" stop-color="#d9eef4">
+          <animate
+            attributeName="stop-color"
+            values="#d9eef4;#b8dee9;#f0f9fb;#d9eef4"
+            dur="3s"
+            repeatCount="indefinite"></animate>
+        </stop>
+      </linearGradient>
+    </defs>
+    <path
+      d="M 256 156 C 256 211.228 211.228 256 156 256 L 0 256 L 0 100 C 0 44.772 44.772 0 100 0 L 256 0 Z M 106 16 C 56.294 16 16 56.294 16 106 L 16 150 C 16 199.706 56.294 240 106 240 L 150 240 C 199.706 240 240 199.706 240 150 L 240 106 C 240 56.294 199.706 16 150 16 Z"
+      fill="url(#animGrad)"></path>
+  </svg>
+</div>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Lang } from '../i18n/translations';
+import { useTranslations } from '../i18n/translations';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = useTranslations(lang);
+---
+
+<BaseLayout title="ardzcodes - Success" description="Form successfully submitted" isSuccessPage={true}>
+  <main class="relative flex h-screen w-full items-center justify-center bg-brand-50 dark:bg-slate-950">
+    <div class="flex h-[200px] w-[60%] flex-col justify-center rounded-[10px] bg-white px-12 py-8 text-slate-900 shadow-sm ring-1 ring-brand-100 dark:bg-slate-900 dark:text-slate-100 dark:ring-slate-700 max-[68.75em]:h-[350px] max-[68.75em]:w-[85%] max-[68.75em]:items-center max-[37.5em]:h-[500px] max-[37.5em]:w-[90%] max-[37.5em]:px-8 max-[37.5em]:text-center">
+      <h1 class="relative text-[3rem] font-bold leading-[3rem] max-[37.5em]:mb-[10px]">{t.success.title}</h1>
+      <p class="text-[1.25rem] font-light leading-[110%] tracking-[0.8px] text-slate-600 dark:text-slate-300">{t.success.text}</p>
+
+      <button class="mt-[25px] w-[300px] border-0 bg-transparent p-0 text-left max-[37.5em]:mt-[50px] max-[37.5em]:flex max-[37.5em]:w-full max-[37.5em]:items-center max-[37.5em]:justify-center max-[37.5em]:text-center">
+        <a class="flex items-center text-[1.25rem] font-light leading-[110%] tracking-[0.8px] text-brand-500 max-[37.5em]:justify-center" href={lang === 'es' ? '/es/' : '/'}>
+          <i class="fa-solid fa-arrow-left mr-[15px] text-brand-500" aria-hidden="true"></i>
+          <span>{t.success.back}</span>
+        </a>
+      </button>
+    </div>
+
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+  </main>
+</BaseLayout>

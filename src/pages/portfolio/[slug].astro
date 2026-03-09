@@ -1,0 +1,98 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work')
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+
+const { title, excerpt, publishedAt, cover, tags, client, role, projectUrl, repoUrl } = entry.data
+---
+
+<BaseLayout title={`${title} | Case Study`} description={excerpt || `${title} case study`}>
+  <main class="pt-40 pb-20 lg:pt-52">
+    <article class="mx-auto max-w-7xl px-8">
+      <a href="/portfolio" class="text-brand-500 hover:underline">← Back to portfolio</a>
+
+      <header class="mt-4">
+        <h1 class="text-[2.7rem] leading-[1.1] font-bold text-slate-900 dark:text-slate-100">
+          {title}
+        </h1>
+        {
+          excerpt ? (
+            <p class="mt-4 text-[1.1rem] text-slate-600 dark:text-slate-300">{excerpt}</p>
+          ) : null
+        }
+
+        <div
+          class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[0.95rem] text-slate-500 dark:text-slate-400"
+        >
+          {publishedAt ? <span>Published: {publishedAt.toLocaleDateString()}</span> : null}
+          {client ? <span>Client: {client}</span> : null}
+          {role ? <span>Role: {role}</span> : null}
+        </div>
+
+        {
+          projectUrl || repoUrl ? (
+            <div class="mt-4 flex flex-wrap gap-3">
+              {projectUrl ? (
+                <a
+                  href={projectUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="border-brand-500 text-brand-500 hover:bg-brand-500 rounded border px-4 py-2 hover:text-white"
+                >
+                  View Live Project
+                </a>
+              ) : null}
+
+              {repoUrl ? (
+                <a
+                  href={repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="border-brand-500 text-brand-500 hover:bg-brand-500 rounded border px-4 py-2 hover:text-white"
+                >
+                  View Repository
+                </a>
+              ) : null}
+            </div>
+          ) : null
+        }
+
+        {
+          cover ? (
+            <img
+              src={cover}
+              alt={title}
+              class="border-brand-200 mt-6 w-full rounded-[12px] border dark:border-slate-700"
+            />
+          ) : null
+        }
+
+        {
+          tags.length ? (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <span class="bg-brand-100 rounded px-3 py-1 text-[0.85rem] text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          ) : null
+        }
+      </header>
+
+      <section data-case-study-content class="mt-10">
+        <Content />
+      </section>
+    </article>
+  </main>
+</BaseLayout>

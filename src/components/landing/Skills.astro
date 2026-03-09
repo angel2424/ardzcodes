@@ -1,0 +1,202 @@
+---
+import { Icon } from 'astro-icon/components'
+
+const skills = [
+  {
+    heading: 'Frontend',
+    list: [
+      {
+        icon: 'fa7-brands:react',
+        name: 'React',
+      },
+      {
+        icon: 'devicon-plain:nextjs',
+        name: 'Next.js',
+      },
+      {
+        icon: 'fa7-brands:vuejs',
+        name: 'Vue.js',
+      },
+      {
+        icon: 'devicon-plain:quasar',
+        name: 'Quasar',
+      },
+      {
+        icon: 'devicon-plain:astro',
+        name: 'Astro',
+      },
+      {
+        icon: 'devicon-plain:typescript',
+        name: 'Typescript',
+      },
+      {
+        icon: 'devicon-plain:javascript',
+        name: 'Javascript',
+      },
+    ],
+  },
+  {
+    heading: 'Design/Styling & Motion',
+    list: [
+              {
+        icon: 'fa7-brands:tailwind-css',
+        name: 'Tailwind CSS',
+      },
+      {
+        icon: 'fa7-brands:sass',
+        name: 'Sass',
+      },
+      {
+        icon: 'simple-icons:gsap',
+        name: 'GSAP',
+      },
+      {
+        icon: 'fa7-brands:figma',
+        name: 'Figma',
+      },
+      {
+        icon: 'ic:outline-design-services',
+        name: 'UI/UX',
+      }
+    ]
+  },
+  {
+    heading: 'State Management & API\'s',
+    list: [
+      {
+        icon: 'simple-icons:pinia',
+        name: 'Pinia',
+      },
+      {
+        icon: 'simple-icons:redux',
+        name: 'Redux',
+      },
+      {
+        icon: 'devicon-plain:axios',
+        name: 'Axios',
+      },
+      {
+        icon: 'simple-icons:i18next',
+        name: 'i18n',
+      },
+      {
+        icon: 'dashicons:rest-api',
+        name: 'REST APIs',
+      },
+      {
+        icon: 'devicon-plain:graphql',
+        name: 'GraphQL',
+      },
+    ]
+  },
+    {
+    heading: 'Infrastructure',
+    list: [
+      {
+        icon: 'fa7-brands:docker',
+        name: 'Docker',
+      },
+      {
+        icon: 'fa7-brands:docker',
+        name: 'Dokploy',
+      },
+      {
+        icon: 'fa7-brands:aws',
+        name: 'AWS S3',
+      },
+      {
+        icon: 'devicon-plain:googlecloud',
+        name: 'Google Cloud',
+      },
+      {
+        icon: 'devicon-plain:netlify',
+        name: 'Netlify',
+      },
+      {
+        icon: 'simple-icons:vercel',
+        name: 'Vercel',
+      },
+      {
+        icon: 'simple-icons:hostinger',
+        name: 'Hostinger VPS',
+      },
+      {
+        icon: 'fa7-brands:linux',
+        name: 'Linux',
+      },
+    ]
+  },
+    {
+    heading: 'Others',
+    list: [
+      {
+        icon: 'simple-icons:supabase',
+        name: 'Supabase',
+      },
+      {
+        icon: 'devicon-plain:azuresqldatabase',
+        name: 'SQL',
+      },
+      {
+        icon: 'simple-icons:clerk',
+        name: 'Clerk Auth',
+      },
+      {
+        icon: 'simple-icons:sanity',
+        name: 'Sanity CMS',
+      },
+      {
+        icon: 'simple-icons:directus',
+        name: 'Directus',
+      },
+      {
+        icon: 'simple-icons:postman',
+        name: 'Postman',
+      },
+      {
+        icon: 'simple-icons:git',
+        name: 'Git',
+      },
+      {
+        icon: 'simple-icons:github',
+        name: 'Github',
+      },
+      {
+        icon: 'simple-icons:gitlab',
+        name: 'Gitlab',
+      },
+      {
+        icon: 'simple-icons:npm',
+        name: 'npm',
+      },
+      {
+        icon: 'simple-icons:pnpm',
+        name: 'pnpm',
+      },
+    ]
+}
+]
+---
+
+<section class="relative mx-auto max-w-7xl py-28 px-8 flex flex-col gap-12">
+  <h2
+    class="text-brand-900 dark:text-brand-100 font-heading relative text-4xl font-bold"
+  >
+    Skills
+  </h2>
+
+  <div class="flex flex-col gap-4">
+    { skills?.map(skill => (
+        <h4 class="text-brand-700 dark:text-brand-400 text-xl font-semibold">{skill.heading}</h4>
+        <div class="flex items-center flex-wrap">
+            {skill.list?.map(item => (
+                <div class="flex items-center not-last:after:w-0.5 not-last:after:h-5 not-last:after:bg-brand-500 not-last:after:rounded-full not-last:after:mx-6 gap-2 mb-8">
+                    <Icon name={item.icon} width={30} height={30} class="dark:text-brand-100" />
+                    <h3 class="text-lg font-medium dark:text-brand-100">{item.name}</h3>
+                </div>
+            ))}
+        </div>
+    ))
+    }
+  </div>
+</section>

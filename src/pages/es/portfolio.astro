@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Projects from '../../components/landing/Projects.astro'
+import type { Lang } from '../../i18n/translations'
+import { useTranslations } from '../../i18n/translations'
+
+const lang = (Astro.currentLocale ?? 'es') as Lang
+const t = useTranslations(lang)
+---
+
+<BaseLayout title="ardzcodes - Portfolio" description="Portfolio projects built by ardzcodes">
+  <main class="relative z-10">
+    <section class="mx-auto max-w-7xl px-8 pt-40 pb-0 lg:pt-64">
+      <h1 class="text-5xl font-extrabold text-slate-900 lg:text-6xl dark:text-slate-100">
+        Portfolio
+      </h1>
+      <p
+        class="mt-3 text-xl leading-snug font-light tracking-wide text-slate-600 dark:text-slate-300"
+      >
+        {t.portfolio.text}
+      </p>
+    </section>
+
+    <Projects showAll={true} showTitle={false} />
+  </main>
+</BaseLayout>

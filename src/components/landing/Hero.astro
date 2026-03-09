@@ -1,0 +1,46 @@
+---
+import Button from '../ui/Button.astro'
+import { ArrowUpRight } from '@lucide/astro'
+import type { Lang } from '../../i18n/translations'
+import { useTranslations } from '../../i18n/translations'
+
+const lang = (Astro.currentLocale ?? 'en') as Lang
+const t = useTranslations(lang)
+---
+
+<section id="hero" data-section="hero" class="relative z-10 overflow-x-hidden">
+  <div
+    class="flex h-screen w-full flex-col justify-center gap-3 px-8 lg:items-center lg:text-center"
+  >
+    <h2 class="relative text-2xl font-normal text-slate-900 dark:text-slate-100">
+      <span>{t.hero.hello}</span>
+      <span
+        id="hero-hand"
+        class="absolute bottom-0 ml-3 origin-bottom-right transition-transform duration-100"
+        >👋</span
+      >
+    </h2>
+
+    <h1
+      id="hero-role"
+      class="font-heading text-brand-950 relative text-6xl font-bold! dark:text-slate-100"
+    >
+      {t.hero.role}
+    </h1>
+
+    <h2 class="mb-10 text-xl font-normal text-slate-900 dark:text-slate-100">
+      {t.hero.location}
+    </h2>
+
+    <Button href="#contact">
+      {t.hero.button}
+      <ArrowUpRight slot="right-icon" />
+    </Button>
+  </div>
+
+  <div
+    class="absolute right-0 bottom-0 left-0 flex h-[13vh] items-center justify-center text-slate-700 dark:text-slate-300"
+  >
+    <i class="fa-solid fa-arrow-down text-[23px]" aria-hidden="true"></i>
+  </div>
+</section>

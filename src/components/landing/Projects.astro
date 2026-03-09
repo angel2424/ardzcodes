@@ -1,0 +1,57 @@
+---
+import ProjectCard from '../ui/ProjectCard.astro'
+import projectsEn from '../../json/projects.json'
+import projectsEs from '../../json/projects_es.json'
+import type { Lang } from '../../i18n/translations'
+import { useTranslations } from '../../i18n/translations'
+import Button from '../ui/Button.astro'
+
+const { showAll = false, showTitle = true } = Astro.props
+
+const lang = (Astro.currentLocale ?? 'en') as Lang
+const t = useTranslations(lang)
+
+const filtered = showAll ? projectsEn : projectsEn.slice(0, 2)
+const projectMapEs = new Map(projectsEs.map((item) => [String(item.id), item]))
+---
+
+<section data-section="projects" class="mx-auto max-w-7xl overflow-hidden px-8 py-28">
+  {
+    showTitle ? (
+      <h2 class="font-heading text-brand-900 dark:text-brand-100 relative mb-8 overflow-hidden text-4xl">
+        {t.work.title}
+      </h2>
+    ) : null
+  }
+
+  <div
+    class:list={[
+      'gap-8',
+      showAll ? 'grid grid-cols-1 lg:grid-cols-2' : 'flex flex-col lg:flex-row',
+    ]}
+  >
+    {
+      filtered.map((project, index) => (
+        <ProjectCard
+          projectEn={project}
+          projectEs={projectMapEs.get(String(project.id))}
+          index={index}
+          lang={lang}
+          labels={{
+            live: t.work.projectButton1,
+            github: t.work.projectButton2,
+            caseStudy: t.work.projectButton3,
+          }}
+        />
+      ))
+    }
+  </div>
+
+  {
+    showAll ? null : (
+      <div class="flex justify-center py-[30px]">
+        <Button href="/portfolio">{t.work.button}</Button>
+      </div>
+    )
+  }
+</section>

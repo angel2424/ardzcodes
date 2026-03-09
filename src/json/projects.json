@@ -1,0 +1,68 @@
+[
+  {
+    "id": "8",
+    "img": "",
+    "title": "Dr. Gilberto Viesca",
+    "tech": ["Astro", "Tailwind CSS", "Directus CMS", "GSAP", "Vercel"],
+    "live": "https://drgilbertoviesca.com",
+    "github": ""
+  },
+  {
+    "id": "9",
+    "img": "",
+    "title": "Maverick Mobile Home Services",
+    "tech": ["Astro", "Tailwind CSS", "Directus CMS", "Shadcn/ui", "Vercel"],
+    "live": "https://maverickmobilehomeservices.com",
+    "github": ""
+  },
+  {
+    "id": "1",
+    "img": "allende.png",
+    "title": "Government website of Allende, Coahuila",
+    "slug": "allende",
+    "tech": ["Next JS", "React", "Netlify", "Sanity CMS", "Tailwind CSS"],
+    "live": "https://allendecoahuila.com",
+    "github": ""
+  },
+  {
+    "id": "7",
+    "img": "devworks.png",
+    "title": "DevWorks Studio",
+    "slug": "devworks",
+    "tech": ["Nuxt", "Vue 3", "Netlify", "GSAP", "Tailwind CSS"],
+    "live": "https://devworksstudio.site",
+    "github": ""
+  },
+  {
+    "id": "3",
+    "img": "goodmemx.jpg",
+    "title": "Good Memories",
+    "tech": ["React", "Next JS", "Hygraph CMS", "Netlify"],
+    "live": "https://goodmemx.devworksstudio.site",
+    "github": "https://github.com/angel2424/goodmemories"
+  },
+  {
+    "id": "4",
+    "img": "wedding_invitation.jpg",
+    "title": "Vow and Beyond | Wedding website (Template)",
+    "slug": "wedding-website",
+    "tech": ["Astro", "Figma", "UI/UX"],
+    "live": "https://wedding-template.devworksstudio.site"
+  },
+  {
+    "id": "5",
+    "img": "weather_app.png",
+    "title": "Weather web app",
+    "tech": ["React JS", "OpenWeather Api", "CSS"],
+    "live": "https://weather.devworksstudio.site",
+    "github": "https://github.com/angel2424/weather-app"
+  },
+  {
+    "id": "6",
+    "img": "space_tourism.png",
+    "title": "Space Tourism",
+    "tech": ["React JS", "CSS"],
+    "live": "https://space.devworksstudio.site",
+    "github": "https://github.com/angel2424/space_tourism/tree/master"
+  }
+]

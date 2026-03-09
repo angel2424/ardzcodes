@@ -1,0 +1,146 @@
+---
+import type { Lang } from '../i18n/translations'
+import { useTranslations } from '../i18n/translations'
+
+const lang = (Astro.currentLocale ?? 'en') as Lang
+const t = useTranslations(lang)
+
+const currentPath = Astro.url.pathname
+const pathWithoutLocale = lang === 'es' ? currentPath.replace(/^\/es/, '') || '/' : currentPath
+const enUrl = pathWithoutLocale
+const esUrl = '/es' + (pathWithoutLocale === '/' ? '' : pathWithoutLocale)
+
+const routes = [
+  {
+    href: lang === 'es' ? '/es/' : '/',
+    label: t.header.home,
+  },
+  {
+    href: lang === 'es' ? '/es/portfolio/' : '/portfolio/',
+    label: t.header.portfolio,
+  },
+]
+
+const socialMedia = [
+  {
+    name: 'Instagram',
+    icon: 'fa-brands fa-instagram',
+    href: 'https://www.instagram.com/ardzcodes/',
+  },
+  {
+    name: 'Github',
+    icon: 'fa-brands fa-github',
+    href: 'https://github.com/angel2424',
+  },
+]
+---
+
+<header
+  id="site-header"
+  class="bg-brand-50/95 dark:bg-brand-950/70 fixed inset-x-0 top-0 z-99 border-b border-gray-200 px-8 py-4 backdrop-blur-2xl dark:border-gray-700"
+>
+  <div class="relative mx-auto flex h-full max-w-7xl items-center justify-between">
+    <a
+      href={lang === 'es' ? '/es/' : '/'}
+      id="site-logo"
+      class="group hover:text-brand-500 z-120 flex items-center text-[1.5rem] font-medium"
+    >
+      <img
+        src="/logo_icon.svg"
+        data-dark-src="/logo_icon.svg"
+        data-light-src="/logo_icon-dark.svg"
+        alt="ardzcodes logo | Front-end Developer in Mexico"
+        class="mr-5 h-auto w-[50px] transition-all duration-300"
+      />
+      <span
+        id="logo-text"
+        class="font-heading text-brand-950 dark:text-brand-100 font-normal! transition-all duration-200"
+      >
+        ardzcodes
+      </span>
+    </a>
+
+    <div id="nav-container" class="hidden items-center gap-8 lg:flex">
+      <nav>
+        <ul class="flex items-center gap-6">
+          {
+            routes.map((route) => (
+              <li class="group px-1 py-4">
+                <a
+                  href={route?.href}
+                  class="font-base group-hover:text-brand-500 dark:text-brand-100 font-medium transition-[color,translate] duration-200 ease-linear group-hover:-translate-y-3"
+                >
+                  {route?.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="relative flex items-center gap-4">
+        {
+          socialMedia.map((item) => (
+            <a
+              class="hover:text-brand-500 text-slate-900 transition duration-300 dark:text-slate-100"
+              target="_blank"
+              rel="noreferrer"
+              href={item?.href}
+              aria-label={`${item?.name} | Angel Rodriguez - Front-end Developer in Mexico`}
+            >
+              <i class={`${item?.icon} text-xl`} aria-hidden="true" />
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="flex items-center justify-center gap-6">
+        <div class="bg-brand-800 relative flex h-8 w-24 overflow-hidden rounded-lg p-1">
+          <a
+            href={enUrl}
+            aria-label="Switch to English"
+            class:list={[
+              'z-10 flex flex-1 items-center justify-center rounded-sm text-sm transition-colors duration-200',
+              lang === 'en' ? 'text-brand-900 bg-white font-medium' : 'text-white',
+            ]}>EN</a
+          >
+          <a
+            href={esUrl}
+            aria-label="Cambiar a Español"
+            class:list={[
+              'z-10 flex flex-1 items-center justify-center rounded-sm text-sm transition-colors duration-200',
+              lang === 'es' ? 'text-brand-900 bg-white font-medium' : 'text-white',
+            ]}>ES</a
+          >
+        </div>
+
+        <button id="theme-toggle" type="button" aria-label="Toggle theme" class="cursor-pointer">
+          <img
+            id="bulb-image"
+            src="/lightbulb-off.svg"
+            data-dark-src="/lightbulb-off.svg"
+            data-light-src="/lightbulb-on.svg"
+            alt="Theme toggle"
+            class="h-[25px] w-full"
+          />
+        </button>
+      </div>
+    </div>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      aria-label="Open menu"
+      class="absolute right-0 z-50 block lg:hidden"
+    >
+      <span
+        id="menu-bar-top"
+        class="mb-[3px] block h-[3px] w-[30px] bg-slate-900 transition-transform duration-300 dark:bg-slate-100"
+      ></span>
+      <span
+        id="menu-bar-bottom"
+        class="block h-[3px] w-[30px] bg-slate-900 transition-transform duration-300 dark:bg-slate-100"
+      ></span>
+    </button>
+  </div>
+</header>

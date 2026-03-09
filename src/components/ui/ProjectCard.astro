@@ -1,0 +1,87 @@
+---
+import { GitBranchPlus, Github } from '@lucide/astro'
+import type { Lang } from '../../i18n/translations'
+import Button from './Button.astro'
+
+interface Labels {
+  live: string
+  github: string
+  caseStudy: string
+}
+
+const { projectEn, projectEs, index = 0, lang = 'en' as Lang, labels } = Astro.props
+
+const resolvedLang = lang as Lang
+const project = resolvedLang === 'es' && projectEs ? projectEs : projectEn
+const title = project?.title ?? projectEn?.title ?? ''
+const tech: string[] = project?.tech ?? projectEn?.tech ?? []
+const live = projectEn?.live ?? ''
+const github = projectEn?.github ?? ''
+const img = projectEn?.img ?? ''
+const alt = projectEn?.title ?? 'Project preview'
+const imgSrc = live
+  ? `https://api.microlink.io/?url=${live}&screenshot=true&meta=false&embed=screenshot.url`
+  : `/${img}`
+
+const liveLabel = labels?.live ?? 'Live Website'
+const githubLabel = labels?.github ?? 'Github'
+---
+
+<article
+  data-index={index}
+  class="w-full overflow-hidden rounded-2xl transition-opacity duration-700"
+>
+  <div class="group relative h-[400px]">
+    <div
+      class="bg-brand-950/60 absolute top-0 left-0 z-2 flex h-full w-full flex-col items-center justify-center gap-6 rounded-2xl opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100"
+      data-overlay
+    >
+      {
+        live ? (
+          <Button className="w-96!" target="_blank" href={live}>
+            <i class="fa-regular fa-window-maximize" slot={'icon'} />
+            {liveLabel}
+          </Button>
+        ) : null
+      }
+
+      {
+        !github && !live ? (
+          <p class="text-slate-100 dark:text-slate-900">Coming soon... 🫡</p>
+        ) : null
+      }
+
+      {
+        github ? (
+          <Button className="w-96!" target="_blank" href={github}>
+            <i class="fa-brands fa-github" slot={'icon'} />
+            {githubLabel}
+          </Button>
+        ) : null
+      }
+    </div>
+
+    <img
+      src={imgSrc}
+      {alt}
+      loading="lazy"
+      class="border-brand-500 h-[400px] w-full rounded-2xl border-[3px] object-cover"
+    />
+  </div>
+
+  <div class="px-[5px] py-[10px]">
+    <h3 class="mt-[15px] w-fit text-[1.5rem] font-semibold text-slate-900 dark:text-slate-100">
+      {title}
+    </h3>
+
+    <div class="flex flex-wrap gap-y-[10px] py-5">
+      {
+        tech.map((skill) => (
+          <span class="bg-brand-100 mr-[10px] rounded-2xl px-[15px] py-[5px] text-slate-800 dark:bg-slate-600 dark:text-slate-100">
+            {skill}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</article>

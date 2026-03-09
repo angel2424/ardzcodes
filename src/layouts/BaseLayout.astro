@@ -1,0 +1,64 @@
+---
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import '../styles/global.css'
+import type { Lang } from '../i18n/translations'
+import Shape1 from '@/components/ui/shapes/Shape1.astro'
+
+const {
+  title = 'ardzcodes',
+  description = 'Portfolio website',
+  isSuccessPage = false,
+} = Astro.props
+
+const lang = (Astro.currentLocale ?? 'en') as Lang
+---
+
+<!doctype html>
+<html {lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark light" />
+    <title>{title}</title>
+    <script is:inline>
+      ;(() => {
+        const storedTheme = localStorage.getItem('theme')
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        const theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : systemTheme
+
+        document.documentElement.setAttribute('data-theme', theme)
+        document.documentElement.style.colorScheme = theme
+      })()
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body class="bg-brand-50 dark:bg-brand-950 dark:text-gray-10 relative text-gray-600 antialiased">
+    <div data-app-root class="min-h-screen">
+      <div id="custom-cursor" class="app-cursor" style="display: none;"></div>
+
+      <div class="max-w-8xl mx-auto">
+        {!isSuccessPage && <Header />}
+        <slot />
+      </div>
+
+      {!isSuccessPage && <Footer />}
+    </div>
+
+    <script>
+      import '../scripts/app.js'
+    </script>
+  </body>
+</html>
