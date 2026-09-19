@@ -1,19 +1,39 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@font-face {
+  font-family: 'Sentient';
+  src:
+    url('/fonts/Sentient-Variable.woff2') format('woff2'),
+    url('../fonts/Sentient-Variable.woff') format('woff'),
+    url('../fonts/Sentient-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sentient-Italic';
+  src:
+    url('/fonts/Sentient-VariableItalic.woff2') format('woff2'),
+    url('/fonts/Sentient-VariableItalic.woff') format('woff'),
+    url('/fonts/Sentient-VariableItalic.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: italic;
+}
 
 @theme {
-  --color-brand-50: #f0f9fb;
-  --color-brand-100: #d9eef4;
-  --color-brand-200: #b8dee9;
-  --color-brand-300: #87c5d9;
-  --color-brand-400: #4fa4c1;
-  --color-brand-500: #31809d;
-  --color-brand-600: #2e6e8c;
-  --color-brand-700: #2b5b73;
-  --color-brand-800: #2a4c60;
-  --color-brand-900: #274152;
-  --color-brand-950: #152937;
+  --color-brand-50: #f7f1ee;
+  --color-brand-100: #efe2dc;
+  --color-brand-200: #dec6ba;
+  --color-brand-300: #cea997;
+  --color-brand-400: #be8d74;
+  --color-brand-500: #ad7052;
+  --color-brand-600: #8b5a41;
+  --color-brand-700: #684331;
+  --color-brand-800: #452d21;
+  --color-brand-900: #231610;
+  --color-brand-950: #18100b;
 
   --text-xl: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem); /* 18 → 20 */
   --text-2xl: clamp(1.5rem, 1.25rem + 0.9vw, 1.875rem); /* 24 → 30 */
@@ -35,7 +55,7 @@ body {
 }
 
 .font-heading {
-  font-family: 'Cal Sans' !important;
+  font-family: 'Sentient' !important;
   font-weight: 500;
 }
 
@@ -221,8 +241,8 @@ textarea[data-form-control]:-webkit-autofill:focus {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #31809d;
-  border: 0 solid #31809d;
+  background-color: var(--color-brand-500);
+  border: 0 solid var(--color-brand-700);
   position: fixed;
   z-index: 1000;
   pointer-events: none;
@@ -239,7 +259,7 @@ textarea[data-form-control]:-webkit-autofill:focus {
   width: 50px;
   height: 50px;
   opacity: 0.5;
-  border: 2px solid #31809d;
+  border: 2px solid var(--color-brand-800);
   border-radius: 50%;
   background-color: transparent;
   position: fixed;

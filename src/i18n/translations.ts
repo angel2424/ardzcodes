@@ -22,7 +22,7 @@ const translations = {
     },
     about: {
       title: 'About Me',
-      text: "Hi, i'm a Frontend Engineer with 3 years of professional experience shipping web products, from design system to deployment. I design in Figma, build in Vue, React and Astro, and deliver to thousands of users. Outside my day job, I run DevWorks Studio, a web agency where I’ve built commercial sites, and client-specific digital products for businesses across México and the US. I care about the whole product, not just the frontend layer, and I’m always learning more.",
+      text: 'Product-minded UI & Front-End Engineer with hands-on experience bridging UI/UX design, design systems, and modern front-end architecture. Proven track record of establishing component design systems, leading client discovery to backend schema alignment, and building scalable web applications with Vue 3, React, Next.js, and Quasar. Primary design system and front-end lead across engineering teams, specializing in clean, user-centered digital interfaces.',
     },
     contact: {
       title: "Let's get in contact!",
@@ -63,7 +63,7 @@ const translations = {
     },
     about: {
       title: 'Acerca de Mi',
-      text: 'Hola, soy un Ingeniero Frontend con 3 años de experiencia profesional lanzando productos web, desde sistemas de diseño hasta despliegue. Diseño en Figma, desarrollo en Vue, React y Astro, y entrego productos a miles de usuarios. Fuera de mi trabajo, dirijo DevWorks Studio, una agencia web donde he construido sitios comerciales y productos digitales a medida para empresas en México y Estados Unidos. Me importa el producto completo, no solo la capa frontend, y siempre estoy aprendiendo más.',
+      text: 'Ingeniero Front-End enfocado en desarrollo de producto, con experiencia enla construcción de aplicaciones web escalables e interfaces responsivas de alta calidad utilizando React, TypeScript y JavaScript moderno. Cuento con trayectoria liderando funcionalidades complejas, integrando APIs RESTful y colaborando activamente en equipos de ingeniería remotos con esquemas de trabajo asíncronos. Apasionado por la mejora continua, el equilibrio entre los requerimientos técnicos y la experiencia de usuario, y el aprovechamiento de herramientas modernas para generar productos de alto impacto.',
     },
     contact: {
       title: '¡Comunicate conmigo!',
